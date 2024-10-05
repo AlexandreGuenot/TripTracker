@@ -6,6 +6,10 @@
     background-color: #f8f9fa; /* Light beige/grayish background */
 }
 
+.sign-in-page.dark {
+    background-color: #121212; /* Dark background */
+}
+
 /* Left-side image container */
 .left-side {
     display: flex;
@@ -21,6 +25,9 @@
     height: 100vh;
     object-fit: cover;
 }
+.sign-in-page.dark .left-side img {
+    filter: brightness(0.7);
+}
 
 /* Right-side form container */
 .right-side {
@@ -32,7 +39,13 @@
     flex: 1;
     background-color: #fff;
 }
-form{
+
+.sign-in-page.dark .right-side {
+    background-color: #1e1e1e; /* Dark background for right side */
+    color: #fff; /* Text color for right side */
+}
+
+form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,11 +55,23 @@ form{
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+
+.sign-in-page.dark .right-side form {
+    background-color: #1e1e1e; /* Dark background for form */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
+
+}
+
 form h2 {
     font-size: 2rem;
     color: #333;
     margin-bottom: 1.5rem;
 }
+
+.sign-in-page.dark form h2 {
+    color: #fff;
+}
+
 input[type="email"],
 input[type="password"] {
     width: 320px;
@@ -58,10 +83,23 @@ input[type="password"] {
     color: #333;
     transition: border-color 0.3s;
 }
+
+.sign-in-page.dark input[type="email"],
+.sign-in-page.dark input[type="password"] {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
+
 input[type="email"]:focus,
 input[type="password"]:focus {
     border-color: #333;
     outline: none;
+}
+
+.sign-in-page.dark input[type="email"]:focus,
+.sign-in-page.dark input[type="password"]:focus {
+    border-color: #fff;
 }
 
 /* Submit button */
@@ -76,13 +114,56 @@ button[type="submit"] {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+.sign-in-page.dark button[type="submit"] {
+    background-color: #fff;
+    color: #333;
+}
+
 button[type="submit"]:hover {
     background-color: #444;
 }
+
+.sign-in-page.dark button[type="submit"]:hover {
+    background-color: #ddd;
+}
+
+/* Text color for switch text */
 .switch-text {
     font-size: 0.9rem;
     color: #666;
 }
+
+.sign-in-page.dark .switch-text {
+    color: #ccc; /* Lighter color for dark mode */
+}
+
+/* Toggle button */
+.theme-toggle {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sign-in-page.dark .theme-toggle {
+    background-color: #fff;
+    color: #333;
+}
+
+.theme-toggle:hover {
+    background-color: #444;
+}
+
+.sign-in-page.dark .theme-toggle:hover {
+    background-color: #ddd;
+}
+
 .link-button {
     background: none;
     border: none;
@@ -96,6 +177,15 @@ button[type="submit"]:hover {
 .link-button:hover {
     color: #555;
 }
+
+.sign-in-page.dark .link-button {
+    color: #fff;
+}
+
+.sign-in-page.dark .link-button:hover {
+    color: #bbb;
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .sign-in-page {
