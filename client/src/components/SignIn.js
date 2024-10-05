@@ -1,50 +1,75 @@
-// components/SignIn.js
 import React, { useState } from 'react';
-import { supabase } from '../services/supabaseClient';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+import './SignIn.css';
+import bannerImage from '../assets/banner-image.jpg'; // Adjust the path
 
-const SignIn = () => {
+function SignIn() {
+  const [isSignUp, setIsSignUp] = useState(false); // Toggle state
+
+  const toggleForm = () => setIsSignUp(!isSignUp); // Toggle between Sign In and Sign Up
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate(); // useNavigate hook to replace useHistory
+  const [confirmPassword, setConfirmPassword] = useState(''); // For sign up
 
-  const handleSignIn = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError(null);
-
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      setError(error.message);
+    // Handle sign-in or sign-up logic
+    if (isSignUp) {
+      console.log({ email, password, confirmPassword });
     } else {
-      alert('Sign in successful!');
-      // Redirect to the dashboard after successful login
-      navigate('/dashboard');
+      console.log({ email, password });
     }
   };
 
   return (
-    <div>
-      <h2>Sign In</h2>
-      <form onSubmit={handleSignIn}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Sign In</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
+    <div className="sign-in-page">
+      <div className="left-side">
+        <img src={bannerImage} alt="Banner" />
+      </div>
+      <div className="right-side">
+        <form onSubmit={handleSubmit}>
+          <h2>{isSignUp ? 'Sign Up' : 'Sign In'}</h2>
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {isSignUp && (
+            <div className="input-group">
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+          )}
+          <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+          <p className="switch-text">
+            {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+            <button type="button" className="link-button" onClick={toggleForm}>
+                {isSignUp ? 'Sign In' : 'Sign Up'}
+            </button>
+          </p>
+
+        </form>
+      </div>
     </div>
   );
-};
+}
 
 export default SignIn;
